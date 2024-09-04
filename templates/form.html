@@ -1,0 +1,207 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observatory System for Monitoring Road Accident</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles_form.css') }}">
+    
+</head>
+<body>
+    <div class="container_form">
+        <header>
+            <h1>Observatory System for Monitoring Road Accident in Nigeria</h1>
+            <h2>Case Study: Kogi State</h2>
+        </header>
+
+        <!-- Flash Message Display Section -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <form id="accidentForm" method="POST" action="/form">
+            <!-- Form Inputs with Tooltips and Placeholders -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Day_of_week">Day of Week <span class="tooltip" title="Select the day of the week the accident occurred.">?</span></label>
+                    <select id="Day_of_week" name="Day_of_week" required>
+                        <option value="" disabled selected>Select Day</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Age_band_of_driver">Age Band of Driver <span class="tooltip" title="Choose the age group of the driver involved in the accident.">?</span></label>
+                    <select id="Age_band_of_driver" name="Age_band_of_driver" required>
+                        <option value="" disabled selected>Select Age Band</option>
+                        <option value="Under 18">Under 18</option>
+                        <option value="18-30">18-30</option>
+                        <option value="31-50">31-50</option>
+                        <option value="Over 50">Over 50</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Sex_of_driver">Sex of Driver <span class="tooltip" title="Select the sex of the driver.">?</span></label>
+                    <select id="Sex_of_driver" name="Sex_of_driver" required>
+                        <option value="" disabled selected>Select Sex</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Educational_level">Educational Level <span class="tooltip" title="Choose the highest level of education of the driver.">?</span></label>
+                    <select id="Educational_level" name="Educational_level" required>
+                        <option value="" disabled selected>Select Education Level</option>
+                        <option value="None">None</option>
+                        <option value="Junior high school">Junior high school</option>
+                        <option value="High school">High school</option>
+                        <option value="Above high school">Above high school</option>
+                    </select>
+                </div>
+<!-- 
+                <div class="form-group">
+                    <label for="Vehicle_driver_relation">Vehicle Driver Relation <span class="tooltip" title="Specify the relation of the driver to the vehicle.">?</span></label>
+                    <input type="text" id="Vehicle_driver_relation" name="Vehicle_driver_relation" placeholder="e.g., Owner, Hired">
+                </div> -->
+
+                <div class="form-group">
+                    <label for="Driving_experience">Driving Experience (years) <span class="tooltip" title="Enter the driving experience in years.">?</span></label>
+                    <input type="number" id="Driving_experience" name="Driving_experience" min="0" placeholder="e.g., 5">
+                </div>
+
+                <div class="form-group">
+                    <label for="Type_of_vehicle">Type of Vehicle <span class="tooltip" title="Select the type of vehicle involved in the accident.">?</span></label>
+                    <select id="Type_of_vehicle" name="Type_of_vehicle" required>
+                        <option value="" disabled selected>Select Vehicle Type</option>
+                        <option value="Automobile">Automobile</option>
+                        <option value="Lorry">Lorry</option>
+                        <option value="Motorcycle">Motorcycle</option>
+                        <option value="Public">Public (> 45 seats)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Owner_of_vehicle">Owner of Vehicle <span class="tooltip" title="Specify who owns the vehicle.">?</span></label>
+                    <input type="text" id="Owner_of_vehicle" name="Owner_of_vehicle" placeholder="e.g., Individual, Company">
+                </div>
+
+                <div class="form-group">
+                    <label for="Service_year_of_vehicle">Service Year of Vehicle <span class="tooltip" title="Enter the service year of the vehicle.">?</span></label>
+                    <input type="number" id="Service_year_of_vehicle" name="Service_year_of_vehicle" min="0" placeholder="e.g., 2015">
+                </div>
+
+                <div class="form-group">
+                    <label for="Area_accident_occured">Area Accident Occurred <span class="tooltip" title="Describe the area where the accident occurred.">?</span></label>
+                    <input type="text" id="Area_accident_occured" name="Area_accident_occured" placeholder="e.g., Urban, Rural">
+                </div>
+
+                <div class="form-group">
+                    <label for="Lanes_or_Medians">Lanes or Medians <span class="tooltip" title="Describe the lanes or medians on the road.">?</span></label>
+                    <input type="text" id="Lanes_or_Medians" name="Lanes_or_Medians" placeholder="e.g., Two lanes, Median present">
+                </div>
+
+                <div class="form-group">
+                    <label for="Road_allignment">Road Alignment <span class="tooltip" title="Specify the road alignment.">?</span></label>
+                    <input type="text" id="Road_allignment" name="Road_allignment" placeholder="e.g., Straight, Curved">
+                </div>
+
+                <div class="form-group">
+                    <label for="Types_of_Junction">Types of Junction <span class="tooltip" title="Specify the type of junction.">?</span></label>
+                    <input type="text" id="Types_of_Junction" name="Types_of_Junction" placeholder="e.g., T-junction, Roundabout">
+                </div>
+
+                <div class="form-group">
+                    <label for="Road_surface_type">Road Surface Type <span class="tooltip" title="Specify the type of road surface.">?</span></label>
+                    <input type="text" id="Road_surface_type" name="Road_surface_type" placeholder="e.g., Asphalt, Gravel">
+                </div>
+
+                <div class="form-group">
+                    <label for="Road_surface_conditions">Road Surface Conditions <span class="tooltip" title="Describe the conditions of the road surface.">?</span></label>
+                    <input type="text" id="Road_surface_conditions" name="Road_surface_conditions" placeholder="e.g., Wet, Dry">
+                </div>
+
+                <div class="form-group">
+                    <label for="Light_conditions">Light Conditions <span class="tooltip" title="Describe the light conditions at the time of the accident.">?</span></label>
+                    <input type="text" id="Light_conditions" name="Light_conditions" placeholder="e.g., Daylight, Night">
+                </div>
+
+                <div class="form-group">
+                    <label for="Weather_conditions">Weather Conditions <span class="tooltip" title="Describe the weather conditions at the time of the accident.">?</span></label>
+                    <input type="text" id="Weather_conditions" name="Weather_conditions" placeholder="e.g., Clear, Rainy">
+                </div>
+
+                <div class="form-group">
+                    <label for="Type_of_collision">Type of Collision <span class="tooltip" title="Describe the type of collision.">?</span></label>
+                    <input type="text" id="Type_of_collision" name="Type_of_collision" placeholder="e.g., Rear-end, Side-swipe">
+                </div>
+
+                <div class="form-group">
+                    <label for="Number_of_vehicles_involved">Number of Vehicles Involved <span class="tooltip" title="Enter the number of vehicles involved in the accident.">?</span></label>
+                    <input type="number" id="Number_of_vehicles_involved" name="Number_of_vehicles_involved" min="1" placeholder="e.g., 2">
+                </div>
+
+                <div class="form-group">
+                    <label for="Number_of_casualties">Number of Casualties <span class="tooltip" title="Enter the number of casualties resulting from the accident.">?</span></label>
+                    <input type="number" id="Number_of_casualties" name="Number_of_casualties" min="0" placeholder="e.g., 1">
+                </div>
+
+                <div class="form-group">
+                    <label for="Vehicle_movement">Vehicle Movement <span class="tooltip" title="Describe the movement of the vehicle.">?</span></label>
+                    <input type="text" id="Vehicle_movement" name="Vehicle_movement" placeholder="e.g., Moving forward, Turning left">
+                </div>
+
+                <!-- <div class="form-group">
+                    <label for="Casualty_class">Casualty Class <span class="tooltip" title="Specify the class of the casualty.">?</span></label>
+                    <input type="text" id="Casualty_class" name="Casualty_class" placeholder="e.g., Passenger, Pedestrian">
+                </div> -->
+<!-- 
+                <div class="form-group">
+                    <label for="Sex_of_casualty">Sex of Casualty <span class="tooltip" title="Select the sex of the casualty.">?</span></label>
+                    <select id="Sex_of_casualty" name="Sex_of_casualty" required>
+                        <option value="" disabled selected>Select Sex</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div> -->
+
+                <div class="form-group full-width">
+                    <label for="Cause_of_accident">Cause of Accident <span class="tooltip" title="Specify the cause of the accident.">?</span></label>
+                    <input type="text" id="Cause_of_accident" name="Cause_of_accident" placeholder="e.g., Speeding, Distracted driving">
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        <div class="spinner" id="loadingSpinner" style="display: none;">
+            <img src="{{ url_for('static', filename='spinner.gif') }}" alt="Loading...">
+        </div>
+        <!-- Prediction Result Display
+        {% if prediction %}
+         <div id="result" class="result">{{prediction}}</div>
+         {% endif %} -->
+        <script>
+            document.getElementById('accidentForm').addEventListener('submit', function() {
+                document.getElementById('loadingSpinner').style.display = 'block';
+            });
+        </script>
+    </div>
+
+    
+</body>
+</html>
